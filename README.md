@@ -6,6 +6,8 @@
 
 Chronos Database Backup and Restore provides easy and painless backups of your MySQL, Postgres and Sqlite databases.
 
+Each process, wether dumping, compression or encryption is handled by the specific binary application and then the relevant extension is appened to the output filename.  For example, `chronos` does not compress using `gpg` nor encrypt with `7zip`. This means the trail on how backups were created can easily be followed, and thus can be unpacked without `chronos`, if needed.
+
 ## Requirements
 
 - `mysqldump` if you are going to backup MySQL databases
@@ -212,7 +214,7 @@ zip             19.12 KB    185.52 KB
 
 Encryption is carried out after compression to be effective, however it some cases it could become less secure due to [side channel attacks](https://www.iacr.org/cryptodb/archive/2002/FSE/3091/3091.pdf). 
 
-### GPG
+### GPG (recommended)
 
 [NASA recommend](https://www.nas.nasa.gov/hecc/support/kb/using-gpg-to-encrypt-your-data_242.html) using GPG for file encryption, and this is easily installed on linux operating systems (if not already)
 
@@ -241,4 +243,4 @@ $ brew update
 $ brew install openssl
 ```
 
-If a dump is encrypted it will have the `enc` extension added.
+If a dump is encrypted with `openssl` it will have the `enc` extension added.
