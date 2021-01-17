@@ -16,13 +16,15 @@ class InitCommandTest extends OriginTestCase
 
     public function testInitMySQL()
     {
+        $backupFolder = sys_get_temp_dir() . '/' . uniqid();
+
         $this->exec('init', [
             'mysql',
             'localhost',
             '3306',
             'root',
             'root',
-            '/backup'
+            $backupFolder
         ]);
         $this->assertExitSuccess();
         $this->assertOutputContains('chronos.json saved');
@@ -34,7 +36,7 @@ class InitCommandTest extends OriginTestCase
             "username": "root",
             "password": "root",
             "engine": "mysql",
-            "backupDirectory": "/backup",
+            "backupDirectory": "{$backupFolder}",
             "databaseDirectory": null
         }
         EOT;
@@ -45,10 +47,12 @@ class InitCommandTest extends OriginTestCase
 
     public function testInitSqlite()
     {
+        $backupFolder = sys_get_temp_dir() . '/' . uniqid();
+        
         $this->exec('init', [
             'sqlite',
             '/data',
-            '/backup'
+            $backupFolder
         ]);
         $this->assertExitSuccess();
         $this->assertOutputContains('chronos.json saved');
@@ -60,7 +64,7 @@ class InitCommandTest extends OriginTestCase
             "username": null,
             "password": null,
             "engine": "sqlite",
-            "backupDirectory": "/backup",
+            "backupDirectory": "{$backupFolder}",
             "databaseDirectory": "/data"
         }
         EOT;
@@ -71,9 +75,11 @@ class InitCommandTest extends OriginTestCase
 
     public function testInitException()
     {
+        $backupFolder = sys_get_temp_dir() . '/' . uniqid();
+
         file_put_contents($this->configPath(), json_encode([
             'engine' => 'sqlite',
-            'backupDirectory' => '/backup',
+            'backupDirectory' => $backupFolder,
             'databaseDirectory' => '/data'
         ]));
 
