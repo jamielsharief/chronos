@@ -46,5 +46,8 @@
             "vendor/bin/phpunit -c phpunit.xml.mysql ",
             "vendor/bin/phpunit -c phpunit.xml.postgres"
         ]
-    }
+    },
+    "bin": [
+        "bin/chronos"
+    ]
 }
