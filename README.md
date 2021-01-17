@@ -116,7 +116,7 @@ $ vendor/bin/chronos backup list
 
 version 0.1.0
 
-Backups path: /backup
+Backups path: /backups/bookmarks
 +----------------------+--------------------------------------+----------+
 | Date                 | Backup                               | Size     |
 +----------------------+--------------------------------------+----------+
