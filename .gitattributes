@@ -1,0 +1,17 @@
+.github export-ignore
+tests export-ignore
+phpunit.xml.dist export-ignore
+phpcs.xml.dist export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore
+.coveralls.yml export-ignore
+phpunit.xml.dist export-ignore
+phpcs.xml.dist export-ignore
+CHANGELOG.md export-ignore
+README.md export-ignore
+data export-ignore
+Dockerfile export-ignore
+docker-compose.yml
+phpcs.xml.dist.mysql export-ignore
+phpcs.xml.dist.postgres export-ignore
+phpcs.xml.dist.sqlite export-ignore

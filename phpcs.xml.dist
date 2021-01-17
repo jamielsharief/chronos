@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset name="Backup Restore">
+	<description>Default conding standard</description>
+	<rule ref="PSR2"/>
+	<arg name="colors"/>
+	<arg name="extensions" value="php"/>
+</ruleset>

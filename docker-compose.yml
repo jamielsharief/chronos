@@ -1,0 +1,27 @@
+version: '3.0'
+services:
+  app:
+    build: .
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/app
+  mysql:
+    image: jamielsharief/mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3306:3306"
+  postgres:
+    image: postgres:12.5
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+volumes:
+  mysql-data:
+  pg-data:

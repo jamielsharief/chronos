@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" colors="true" processIsolation="false" stopOnFailure="false" bootstrap="tests/bootstrap.php" backupGlobals="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+    <coverage>
+        <include>
+            <directory suffix=".php">./src/</directory>
+        </include>
+    </coverage>
+    <testsuites>
+        <testsuite name="App Test Suite">
+            <directory>./tests/TestCase/</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <const name="PHPUNIT" value="true"/>
+        <env name="ORIGIN_ENV" value="test"/>
+
+        <env name="DB_USERNAME" value="postgres"/>
+        <env name="DB_PASSWORD" value="root"/>
+        <env name="DB_HOST" value="postgres"/>
+        <env name="DB_DATABASE" value="chronos_test" />
+        <env name="DB_ENGINE" value="postgres"/>
+        <env name="DB_PORT" value="5432"/>
+
+    </php>
+    <listeners>
+        <listener class="Origin\TestSuite\OriginTestListener" file="./vendor/originphp/test-suite/OriginTestListener.php"/>
+    </listeners>
+</phpunit>

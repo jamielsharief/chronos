@@ -1,0 +1,33 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Chronos Database Backup and Restore
+ * Copyright 2021 Jamiel Sharief.
+ *
+ * Licensed under The Apache License 2.0
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * @copyright   Copyright (c) Jamiel Sharief
+ * @license     https://opensource.org/licenses/Apache-2.0 Apache License 2.0
+ */
+declare(strict_types=1);
+require dirname(__DIR__) . '/config/bootstrap.php';
+
+use Origin\Console\ConsoleApplication;
+use Chronos\Console\Command\InitCommand;
+use Chronos\Console\Command\ListCommand;
+use Chronos\Console\Command\BackupCommand;
+use Chronos\Console\Command\RestoreCommand;
+
+$app = new ConsoleApplication();
+$app->name('chronos');
+$app->description([
+    'Chronos - Database Backup and Recovery'
+]);
+
+$app->addCommand('init', InitCommand::class);
+$app->addCommand('backup', BackupCommand::class);
+$app->addCommand('list', ListCommand::class);
+$app->addCommand('restore', RestoreCommand::class);
+exit($app->run());

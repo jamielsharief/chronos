@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# OriginPHP
+# Copyright 2021 Jamiel Sharief
+#
+# Updates version.txt and tags the repo.
+#
+DEV_BRANCH=master
+if [ $# -eq 0 ]; then
+    echo "Usage: release <version>";
+    echo "       release 1.2.1";
+    exit
+fi
+
+VERSION=$1
+if ! [[ "$1" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+then
+    echo "Invalid version";
+    exit 1
+fi
+
+echo ${VERSION} > version.txt
+
+git add version.txt
+git commit -m "Update version number to $VERSION";
+git tag -am $VERSION $VERSION
+# Older repos will need to be master
+git push origin $DEV_BRANCH --tags
