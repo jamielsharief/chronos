@@ -21,6 +21,15 @@ To install this package
 $ composer require jamielsharief/chronos
 ```
 
+Create a folder where you will store your backups, and set the permissions so you can write
+to it, assuming you are a member of the `www-data` group, for example
+
+```bash
+$ mkdir /backups
+$ chown www-data:www-data /backups
+$ chmod 0775 /backups
+```
+
 ## Usage
 
 First you need to initialize your installation which creates `chronos.json` in your project folder with the database settings.
@@ -52,12 +61,12 @@ Password
 > 
 
 Backup directory
-> /backups
+> /backups/crm
 
 [ OK ] chronos.json saved
 ```
 
-> If you are installing on a server with multiple applications, then it could be be a good idea to setup a backup folder for each application , e.g. /backups/crm, /backups/helpdesk
+If you are installing on a server with multiple applications, then it could be be a good idea to setup a folder within your backup folder for each application , e.g. `/backups/crm`, `/backups/helpdesk`
 
 To create backups
 
