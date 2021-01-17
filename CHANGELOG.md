@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added MySQL, Postgres and Sqlite database support
-- Added Bzip2, Gzip, 7zip and Unzip compression
-- Added AES encryption
+- Added compression (Bzip2, Gzip, 7zip and Unzip)
+- Added encryption (GPG,OpenSSL)
 - Added backup
 - Added restore

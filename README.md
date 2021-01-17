@@ -1,4 +1,4 @@
-# Chronos Database Backup & Restore (beta)
+# Chronos Database Backup & Restore
 
 ![license](https://img.shields.io/badge/license-MIT-brightGreen.svg)
 [![build](https://github.com/jamielsharief/chronos/workflows/CI/badge.svg)](https://github.com/jamielsharief/backup-restore/actions)
