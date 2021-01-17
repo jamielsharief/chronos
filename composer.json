@@ -1,5 +1,5 @@
 {
-    "name": "originphp/chronos",
+    "name": "jamielsharief/chronos",
     "description": "Chronos Database Backup Restore",
     "type": "library",
     "keywords": [
@@ -10,7 +10,6 @@
         "mariadb",
         "sqlite"
     ],
-    "homepage": "https://www.originphp.com",
     "license": "MIT",
     "authors": [
         {
