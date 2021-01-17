@@ -16,6 +16,7 @@ namespace Chronos\Test\TestCase;
 
 use Origin\Model\Model;
 use Chronos\BackupRestore;
+use BadMethodCallException;
 use InvalidArgumentException;
 use Origin\TestSuite\OriginTestCase;
 use Chronos\Exception\FileNotFoundException;
@@ -33,6 +34,12 @@ final class ChronosTest extends OriginTestCase
     {
         $this->database = env('DB_DATABASE');
         $this->loadModel('Post', ['className' => Post::class]);
+    }
+
+    public function testNoBackupDirectory()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new BackupRestore();
     }
 
     public function testGetterSetters()
@@ -54,6 +61,14 @@ final class ChronosTest extends OriginTestCase
         $this->assertFileExists($output);
         
         return $name . '.sql';
+    }
+
+    public function testBackupWithTag()
+    {
+        $backupRestore = BackupRestore::get();
+        $path = $backupRestore->backup($this->database, ['tag' => 'monthly']);
+        $this->assertNotEmpty($path);
+        $this->assertStringContains('monthly/' . $this->database, $path);
     }
 
     /**
@@ -380,5 +395,24 @@ final class ChronosTest extends OriginTestCase
         $this->expectExceptionMessage('Invalid database engine');
 
         $backupRestore->backup('foo', ['name' => 'invalid-database-engine']);
+    }
+
+    public function testBackupEncryptionError()
+    {
+        $backupRestore = BackupRestore::get();
+        
+        $this->expectException(BadMethodCallException::class);
+        $backupRestore->backup($this->database, [
+            'encryption' => 'gpg',
+        ]);
+    }
+
+    public function testRestoreWrongFileType()
+    {
+        $backupRestore = BackupRestore::get();
+        $path = $backupRestore->directory() .'/foo.txt';
+        file_put_contents($path, 'foo');
+        
+        $this->assertFalse($backupRestore->restore('foo.txt', $this->database));
     }
 }

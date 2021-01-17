@@ -39,6 +39,31 @@ class RestoreCommandTest extends OriginTestCase
         $this->assertOutputContains('green>OK</green> <white>] Restore');
     }
 
+    public function testBackupAndRestoreAbort()
+    {
+        $database = env('DB_DATABASE');
+        $this->exec('backup ' . $database . ' -v');
+        $this->assertExitSuccess();
+        $backups = BackupRestore::get()->list();
+
+        $this->exec('restore ' . $backups[0] . ' -v', ['no']);
+        $this->assertExitSuccess();
+        $this->assertOutputContains('Existing data will be overwritten, continue?  (yes/no)');
+
+        // Sqlite data/foo.db shows as foo. so not testing now
+        $this->assertOutputNotContains('<cyan>SKIPPED</cyan> <white>] Create database');
+        $this->assertOutputNotContains('green>OK</green> <white>] Restore');
+    }
+
+    public function testBackupDoesNotExist()
+    {
+        $database = env('DB_DATABASE');
+    
+        $this->exec('restore xyz -v');
+        $this->assertExitError();
+        $this->assertErrorContains('<exception> ERROR </exception> <heading>Backup does not exist</heading');
+    }
+
     public function testBackupAndRestoreToDifferentDb()
     {
         $randomdb = 'restore_test_' . time();

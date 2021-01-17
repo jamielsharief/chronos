@@ -20,9 +20,8 @@ use Chronos\Cmd\Encryptor;
 use Chronos\Utility\Shell;
 use BadMethodCallException;
 use Chronos\Cmd\Compressor;
+use Chronos\Utility\Folder;
 use InvalidArgumentException;
-use RecursiveIteratorIterator;
-use RecursiveDirectoryIterator;
 use Chronos\Exception\FileNotFoundException;
 use Chronos\Exception\DirectoryDoesNotExistException;
 use Origin\Configurable\StaticConfigurable as Configurable;
@@ -280,16 +279,7 @@ final class BackupRestore
      */
     public function list(): array
     {
-        $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->directory));
-        $start = strlen($this->directory) + 1;
-        $out = [];
-        foreach ($rii as $item) {
-            if (! $item->isDir()) {
-                $out[] = substr($item->getPathname(), $start);
-            }
-        }
-
-        return $out;
+        return Folder::list($this->directory);
     }
 
     /**
@@ -340,21 +330,5 @@ final class BackupRestore
         $config = static::config($name);
 
         return new BackupRestore($config);
-    }
-    
-    /**
-     * Attribute accessor
-     *
-     * @param string $name
-     * @param string $value
-     * @return string|null
-     */
-    private function attribute(string $name, string $value = null)
-    {
-        if (is_null($value)) {
-            $value = $this->$name;
-        }
-
-        return $this->$name = $value;
     }
 }

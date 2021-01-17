@@ -40,6 +40,14 @@ class BackupCommandTest extends OriginTestCase
         $this->assertOutputContains($database);
     }
 
+    public function testBackupUnkownDatabse()
+    {
+        $this->exec('backup xyz -v');
+
+        $this->assertExitSuccess();
+        $this->assertOutputContains("<red>ERROR</red> <white>] Backup 'xyz'</white>");
+    }
+
     public function testBackupWithCompression()
     {
         $database = env('DB_DATABASE');
