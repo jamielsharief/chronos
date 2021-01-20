@@ -65,12 +65,23 @@ Password
 Backup directory
 > /backups/crm
 
+Enter database name used by this project, this will be used as the default.
+Database name
+> 
+
 [ OK ] chronos.json saved
 ```
 
-If you are installing on a server with multiple applications, then it could be be a good idea to setup a folder within your backup folder for each application , e.g. `/backups/crm`, `/backups/helpdesk`
+> Are you installing on a server with multiple applications? if so it could be be a good idea to setup a folder within your backup folder for each application , e.g. `/backups/crm`, `/backups/helpdesk`
 
-To create backups
+If you provided a default database during setup, then you can simply run the backup command and this will backup up the database(s) listed in `chronos.json`, if there are no databases configured then `chronos` will show you a list of databases 
+asking you yo choose one.
+
+```bash
+$ vendor/bin/chronos backup 
+```
+
+If you didnt or want to backup different databases then you can pass the database names as arguments.
 
 ```bash
 $ vendor/bin/chronos backup bookmarks
@@ -87,6 +98,8 @@ version 0.1.0
 Took 0.06 seconds
 ```
 
+
+
 You can also backup multiple databases at the same time
 
 ```bash
@@ -96,13 +109,13 @@ $ vendor/bin/chronos backup crm helpdesk accounting
 To use compression, simply supply the compression type `7zip`, `bzip2`, `gzip`, `unzip` or `zip`. 
 
 ```bash
-$ vendor/bin/chronos backup crm --compress gzip
+$ vendor/bin/chronos backup --compress gzip
 ```
 
 To encrypt your backups using `AES` you can use `gpg` or `ssl` which uses `openssl`.
 
 ```bash
-$ vendor/bin/chronos backup crm --encrypt gpg # this will ask for password
+$ vendor/bin/chronos backup --encrypt gpg # this will ask for password
 $ CHRONOS_PASSWORD=secret vendor/bin/chronos backup crm --encrypt gpg # uses password from env var
 ```
 

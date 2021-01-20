@@ -51,6 +51,9 @@ class InitCommand extends BaseCommand
             $this->throwError('Error creating directory');
         }
 
+        $this->out('Enter database name used by this project, this will be used as the default.');
+        $database = $this->io->ask('Database name');
+
         $store = new ValueStore($this->configurationPath());
         
         $store->host = $host;
@@ -60,6 +63,7 @@ class InitCommand extends BaseCommand
         $store->engine = $engine;
         $store->backupDirectory = $directory;
         $store->databaseDirectory = $databaseDirectory;
+        $store->databases = $database ? (array) $database : null;
 
         if (! $store->save()) {
             $this->throwError('Error saving configuration', 'Could not save to ' . $this->configurationPath());

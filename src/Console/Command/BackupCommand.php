@@ -58,10 +58,13 @@ class BackupCommand extends BaseCommand
             $this->options['password'] = $this->password();
         }
 
-        $wants = $this->arguments('database') ?: (array) $this->prompt($databases);
+        $wants = $this->arguments('database');
+        if (! $wants) {
+            $wants = $this->config->databases ?: $this->prompt($databases);
+        }
 
         $t = microtime(true);
-        foreach ($wants as $database) {
+        foreach ((array) $wants as $database) {
             if (! in_array($database, $databases)) {
                 $this->io->status('error', "Backup '{$database}'");
                 $this->debug('database does not exist');
