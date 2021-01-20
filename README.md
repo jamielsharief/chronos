@@ -163,16 +163,12 @@ When restoring backups, if the file is encrypted it will prompt you for a passwo
 
 Backups can be compressed using using `bzip2`,`gzip`,`7zip` and `zip`.
 
-Depending upon your linux distribution you might need to install, this is how you
-can install on `ubunutu`.
-
-For brevity I have put all compression packages in one line, however you can install just the one or ones
-that you want.
+Depending upon your linux distribution you might need to install the relevant binary. For brevity I have put all compression packages in one line, however you can install just the one or ones that you want.
 
 Ubuntu/Debian
 
 ```
-$ apt install bzip2 zip gzip pz7ip-full
+$ apt install bzip2 zip gzip p7zip-full
 ```
 
 For Redhat/CentOS/Fedora
