@@ -32,7 +32,7 @@ if (file_exists(getcwd() . '/vendor/autoload.php')) {
 (new ErrorHandler())->register();
 
 Config::write('App.namespace', 'Chronos');
-Config::write('App.debug', true);
+Config::write('App.debug', false);
 
 Cache::config('origin', [
     'className' => FileEngine::class,
