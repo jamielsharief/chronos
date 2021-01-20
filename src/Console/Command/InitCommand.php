@@ -47,7 +47,7 @@ class InitCommand extends BaseCommand
         }
 
         $directory = $this->io->ask('Backup directory');
-        if (! is_dir($directory) && ! mkdir($directory)) {
+        if (! is_dir($directory) && ! mkdir($directory, 0775, true)) {
             $this->throwError('Error creating directory');
         }
 
