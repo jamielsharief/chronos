@@ -65,7 +65,7 @@ Password
 Backup directory
 > /backups/crm
 
-Enter database name used by this project, this will be used as the default.
+Enter the default database name to backup.
 Database name
 > 
 

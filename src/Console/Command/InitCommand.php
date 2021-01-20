@@ -51,7 +51,7 @@ class InitCommand extends BaseCommand
             $this->throwError('Error creating directory');
         }
 
-        $this->out('Enter database name used by this project, this will be used as the default.');
+        $this->out('Enter the default database name to backup.');
         $database = $this->io->ask('Database name');
 
         $store = new ValueStore($this->configurationPath());
