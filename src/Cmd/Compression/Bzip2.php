@@ -53,14 +53,11 @@ class Bzip2 extends BaseCompression
     }
 
     /**
-     * Checks that OpenSSL is installed, in theory it needs v1.1.1. On MacOS LibreSSL is included
-     * and that does not support pbkdf2 iter
-     *
      * @return boolean
      */
     private function isSupported(): bool
     {
-        exec('bzip2 --version 2>&1', $output, $code);
+        exec('bzip2 --help 2>&1', $output, $code);
 
         $result = $output[0] ?? false;
    
