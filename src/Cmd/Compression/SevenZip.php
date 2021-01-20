@@ -13,12 +13,21 @@
 declare(strict_types=1);
 namespace Chronos\Cmd\Compression;
 
+use RuntimeException;
+
 /**
  * To install on ubuntu
  * $ apt install pz7ip-full
  */
 class SevenZip extends BaseCompression
 {
+    public function __construct()
+    {
+        if (! $this->isSupported()) {
+            throw new RuntimeException('7zip is not installed.');
+        }
+    }
+
     /**
      * @param string $path e.g. /backups/mysql.sql
      * @return string
@@ -49,5 +58,18 @@ class SevenZip extends BaseCompression
     public function extension(): string
     {
         return '7z';
+    }
+
+    /**
+     * @internal 7zip has strange output
+     * @return boolean
+     */
+    private function isSupported(): bool
+    {
+        exec('7z --help 2>&1', $output, $code);
+
+        $result = count($output) ? implode(PHP_EOL, $output) : false;
+
+        return $result !== false && $code === 0 && preg_match('/p7zip/', $result);
     }
 }
