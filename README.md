@@ -1,8 +1,8 @@
 # Chronos Database Backup & Restore
 
 ![license](https://img.shields.io/badge/license-MIT-brightGreen.svg)
-[![build](https://github.com/jamielsharief/chronos/workflows/CI/badge.svg)](https://github.com/jamielsharief/backup-restore/actions)
-[![coverage](https://coveralls.io/repos/github/jamielsharief/chronos/badge.svg?branch=master)](https://coveralls.io/github/jamielsharief/backup-restore?branch=master)
+[![build](https://github.com/jamielsharief/chronos/workflows/CI/badge.svg)](https://github.com/jamielsharief/chronos/actions)
+[![coverage](https://coveralls.io/repos/github/jamielsharief/chronos/badge.svg?branch=master)](https://coveralls.io/github/jamielsharief/chronos?branch=master)
 
 Chronos Database Backup and Restore provides easy and painless backups of your MySQL, Postgres and Sqlite databases.
 
