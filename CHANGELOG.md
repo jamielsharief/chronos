@@ -8,7 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.3] - 2021-02-01
 
-Refactored internally to use Process for running commands
+### Fixed
+
+- Fixed Github CI MySQL server gone away error
 
 ## [0.1.2] - 2021-01-20
 
