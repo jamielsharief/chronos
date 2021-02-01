@@ -1,0 +1,30 @@
+name: default
+services:
+  - name: mysql
+    image: jamielsharief/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: chronos_test
+steps:
+  - name: Install Dependencies
+    image: composer
+    commands:
+      - composer install
+  - name: Run PHPunit
+    image: php:7.4
+    commands:
+      - apt update
+      - apt install -y mariadb-client
+      - docker-php-ext-install mysqli pdo pdo_mysql
+      - docker-php-ext-enable pdo_mysql
+      - vendor/bin/phpunit
+    environment:
+      DB_USERNAME: root
+      DB_HOST: mysql
+      DB_DATABASE: chronos_test
+      DB_PASSWORD: root
+      DB_ENGINE: mysql
+  - name: Run PHPStan
+    image: php:7.4
+    commands:
+      - vendor/bin/phpstan analyse src --error-format=github
