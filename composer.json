@@ -32,7 +32,8 @@
         "originphp/console": "^3.15",
         "originphp/model": "^3.15",
         "originphp/defer": "^2.0",
-        "originphp/value-store": "^1.0"
+        "originphp/value-store": "^1.0",
+        "originphp/process": "^3.17"
     },
     "require-dev": {
         "originphp/test-suite": "^3.15",

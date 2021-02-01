@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace Chronos\Cmd;
 
 use Chronos\Utility\File;
-use Chronos\Utility\Shell;
+use Origin\Process\Process;
+use Chronos\Exception\CommandFailureException;
 
 class BaseCommand
 {
@@ -33,16 +34,9 @@ class BaseCommand
      */
     protected $file;
 
-    /**
-     * @var \Chronos\Utility\Shell;
-     */
-    protected $shell;
-
     public function __construct(array $options = [])
     {
         $this->config = array_merge($this->defaultConfig, $options);
-
-        $this->shell = new Shell();
         $this->file = new File();
     }
 
@@ -54,6 +48,11 @@ class BaseCommand
      */
     protected function execute(string $command): string
     {
-        return $this->shell->execute($command);
+        $process = new Process($command, ['escape' => false,'output' => false]);
+        if (! $process->execute()) {
+            throw new CommandFailureException($process->error() ?: 'Error running: ' . $command);
+        }
+
+        return $process->output();
     }
 }

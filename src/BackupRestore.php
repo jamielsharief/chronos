@@ -17,7 +17,6 @@ use RuntimeException;
 use Chronos\Cmd\Database;
 use Chronos\Utility\File;
 use Chronos\Cmd\Encryptor;
-use Chronos\Utility\Shell;
 use BadMethodCallException;
 use Chronos\Cmd\Compressor;
 use Chronos\Utility\Folder;
@@ -67,11 +66,6 @@ final class BackupRestore
      */
     private $file;
 
-    /**
-     * @var \Chronos\Utility\Shell
-     */
-    private $shell;
-
     public function __construct(array $config = [])
     {
         $config += [
@@ -91,7 +85,6 @@ final class BackupRestore
         $this->type = $config['engine'];
 
         $this->file = new File();
-        $this->shell = new Shell();
 
         $this->database = new Database($config);
         $this->compressor = new Compressor();
