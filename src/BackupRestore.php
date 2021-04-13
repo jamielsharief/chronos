@@ -21,6 +21,7 @@ use BadMethodCallException;
 use Chronos\Cmd\Compressor;
 use Chronos\Utility\Folder;
 use InvalidArgumentException;
+use function Origin\Defer\defer;
 use Chronos\Exception\FileNotFoundException;
 use Chronos\Exception\DirectoryDoesNotExistException;
 use Origin\Configurable\StaticConfigurable as Configurable;
