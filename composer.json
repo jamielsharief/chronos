@@ -43,7 +43,7 @@
   "scripts": {
     "run-tests": [
       "vendor/bin/phpunit -c phpunit.xml.sqlite",
-      "vendor/bin/phpunit -c phpunit.xml.mysql ",
+      "vendor/bin/phpunit -c phpunit.xml.mysql",
       "vendor/bin/phpunit -c phpunit.xml.postgres"
     ]
   },
