@@ -56,11 +56,13 @@ jobs:
           fi;
           if [[ ${{ matrix.database }} == 'mysql' ]]; then
              export DB_USERNAME=root;
+             export DB_PORT=3306;
           fi;
           if [[ ${{ matrix.database }} == 'postgres' ]]; then
              export DB_USERNAME=postgres;
+             export DB_PORT=5432;
           fi;
-          
+
           php vendor/bin/phpunit --coverage-clover=clover.xml
         env:
           DB_HOST: 127.0.0.1
@@ -72,5 +74,5 @@ jobs:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: "php vendor/bin/php-coveralls --verbose"
         if: ${{ success() }}
-      - name: Run PHPStan 
+      - name: Run PHPStan
         run: "vendor/bin/phpstan analyse src --error-format=github"
