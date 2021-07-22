@@ -50,9 +50,9 @@ class BaseCommand
     {
         $process = new Process($command, ['escape' => false,'output' => false]);
         if (! $process->execute()) {
-            throw new CommandFailureException($process->error() ?: 'Error running: ' . $command);
+            throw new CommandFailureException($process->getErrorOutput() ?: 'Error running: ' . $command);
         }
 
-        return $process->output();
+        return $process->getOutput();
     }
 }
