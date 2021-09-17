@@ -53,8 +53,17 @@ class BackupCommand extends BaseCommand
     protected function execute(): void
     {
         $databases = $this->loadConfiguration();
-   
+       
         if ($this->options('encrypt')) {
+            /**
+             * This will be deprecated however not using trigger_error as this will break cron jobs
+             * @deprecated 1.0 openssl encryption type
+             */
+            if($this->options('encrypt') === 'openssl'){
+                $this->io->alert('Encryption `openssl` method will be deprecated use GPG instead');
+               /* trigger_error('Encryption `openssl` method is deprecated use GPG instead', E_USER_DEPRECATED
+                );*/
+            }
             $this->options['password'] = $this->password();
         }
 

@@ -239,7 +239,9 @@ For Redhat/CentOS/Fedora
 $ sudo yum install gnupg
 ```
 
-### OpenSSL
+### OpenSSL (deprecated)
+
+> Use GPG instead
 
 To use this encryption engine, you need `openssl` to be installed, this is already on linux systems, but on the Mac `libressl` is included but that does not support does not support `pbkdf2` or `iter`. Both these features [improve security](https://courses.csail.mit.edu/6.857/2018/project/Ainane-Barrett-Johnson-Vivar-OpenSSL.pdf) and should be used.
 
